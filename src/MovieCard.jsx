@@ -1,5 +1,5 @@
 import React from "react";
-
+import defaultImage from './err.jpg';
 
 const MovieCard = ({movie}) =>{
     return(
@@ -9,16 +9,22 @@ const MovieCard = ({movie}) =>{
             </div>
 
             <div>
-              <img src={movie.Poster !== 'N/A' ? movie.Poster : 'https://dummyimage.com/400x400/000/fff.png' } alt={movie.Title}></img>
+              <img 
+                src={movie.Poster !== 'N/A' ? movie.Poster : './err.jpg'}
+                alt={movie.Title}
+                onError={(e) => {
+                    e.target.src = defaultImage;
+                    e.target.onerror = null;
+                }}
+              />
             </div>
 
             <div>
               <span>{movie.Type}</span>
               <h3>{movie.Title}</h3>
             </div>
-          </div>
+        </div>
     )
 }
 
-export default MovieCard
-
+export default MovieCard;
